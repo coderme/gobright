@@ -11,15 +11,17 @@ import (
 
 const (
 	brightnessFile = "/sys/class/backlight/intel_backlight/brightness"
+	maxBrightness = 7000
+	minBrightness = 0
 )
 
 var (
-	value      = flag.Int("value", 50, "Set brightness value, or decr/incr brightness by value based on (-incr/-decr) flags")
+	value      = flag.Int("value", maxBrightness/2, "Set brightness value, or decr/incr brightness by value based on (-incr/-decr) flags")
 	incr       = flag.Bool("incr", false, "Increment brightness percentage by value")
 	decr       = flag.Bool("decr", false, "Decrement brightness percentage by value")
 	brightness = flag.String("file", brightnessFile, "file where to write new brightness value")
-	max        = flag.Int("max", 100, "Max brightness percentage")
-	min        = flag.Int("min", 10, "Min brightness percentage")
+	max        = flag.Int("max", maxBrightness, "Max brightness percentage")
+	min        = flag.Int("min", minBrightness, "Min brightness percentage")
 	quiet      = flag.Bool("quiet", false, "Be Quiet")
 )
 
@@ -32,12 +34,12 @@ func init() {
 		os.Exit(1)
 	}
 
-	if *max > 100 || *max < 0 || *max <= *min {
-		*max = 100
+	if *max > maxBrightness || *max < 0 || *max <= *min {
+		*max = maxBrightness
 	}
 
-	if *min < 0 || *min >= *max {
-		*min = 0
+	if *min < minBrightness || *min >= *max {
+		*min = minBrightness
 	}
 
 }

@@ -1,1 +1,0 @@
-src/gobright.go

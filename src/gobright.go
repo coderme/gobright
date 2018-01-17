@@ -9,25 +9,22 @@ import (
 	"strings"
 )
 
-const (
-	brightnessFile = "/sys/class/backlight/intel_backlight/brightness"
-	maxBrightness = 7000
-	minBrightness = 0
-)
-
-var (
-	value      = flag.Int("value", maxBrightness/2, "Set brightness value, or decr/incr brightness by value based on (-incr/-decr) flags")
-	incr       = flag.Bool("incr", false, "Increment brightness percentage by value")
-	decr       = flag.Bool("decr", false, "Decrement brightness percentage by value")
-	brightness = flag.String("file", brightnessFile, "file where to write new brightness value")
-	max        = flag.Int("max", maxBrightness, "Max brightness percentage")
-	min        = flag.Int("min", minBrightness, "Min brightness percentage")
-	quiet      = flag.Bool("quiet", false, "Be Quiet")
-)
-
 func init() {
-
+	flag.CommandLine.Usage = usage
 	flag.Parse()
+	
+	if *showVersion {
+		printVersion()
+	}
+
+	if *showLicense {
+		printLicense()
+	}
+
+	if *help || *showhelp  {
+		usage()
+	}
+
 
 	if *value == 0 || *incr && *decr {
 		flag.PrintDefaults()

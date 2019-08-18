@@ -1,1 +1,1 @@
-module github.com/codermeorg/gobright
+module github.com/coderme/gobright

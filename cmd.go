@@ -9,7 +9,7 @@ import (
 
 const (
 	name    = "GoBright"
-	version = "2.0"
+	version = "2.1"
 	license = `
 Copyright (c) %d CoderMe.com
  Permission to use, copy, modify, and distribute this software for any
